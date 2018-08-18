@@ -1,0 +1,9 @@
+source 'https://rubygems.org'
+
+gem 'capybara', '~> 3.2', '>= 3.2.1'
+gem 'cucumber'
+gem 'poltergeist'
+gem 'require_all'
+gem 'rspec'
+gem 'selenium-webdriver'
+gem 'site_prism', '~> 2.15', '>= 2.15.1'

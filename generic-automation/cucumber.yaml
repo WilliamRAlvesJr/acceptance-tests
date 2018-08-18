@@ -1,0 +1,19 @@
+---
+<%
+json = " -f json -o targets/logs/cucumber.json"
+html = " -f html -o targets/logs/cucumber_report.html"
+console = " -f pretty"
+default = console
+default << json
+default << html
+%>
+default: -p chrome -p mysql
+chrome: <%=default%> BROWSER=chrome
+chrome_headless: <%=default%> BROWSER=chrome_headless
+firefox: <%=default%> BROWSER=firefox
+firefox_driver: <%=default%> BROWSER=firefox_driver
+firefox_path: <%=default%> BROWSER=firefox_path
+phantomjs: <%=default%> BROWSER=phantomjs
+mysql: <%=default%> TIMEOUT=30
+mssql: <%=default%> TIMEOUT=60
+oracle: <%=default%> TIMEOUT=90
