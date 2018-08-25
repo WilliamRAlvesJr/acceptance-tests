@@ -8,8 +8,9 @@ Dado('possuo os dados:') do |table|
   @user = table.rows_hash
 end
 
-Quando('submeter o formulário') do
+Quando("submeter o formulário") do
   @login_page.sign_in(@user['nome'], @user['senha'])
+  @login_page.wait_for_no_loading
 end
 
 Então('devo estar logado') do
@@ -18,8 +19,16 @@ Então('devo estar logado') do
   # esse eh o wait compativel com as versoes atuais do capybara e do sitePrism
   # @account_page.wait_for_welcome_bar
   # @account_page.wait_until_welcome_bar_visible
-  @login_page.wait_for_no_loading
+
+  # puts @account_page.url_matches(10)
+  # expect(@account_page).to be_displayed
+  wait_page_load(@account_page)
   expect(@account_page.welcome_bar).to have_content 'Hi, Johny Smith'
+
+  @account_page.profiles_bar.wishlist.click
+  @account_page.wishlist_section.preview_first.click
+
+  expect(page).to have_content 'Hyatt Regency Perth'
 end
 
 # Dado("que estou na página principal do google") do

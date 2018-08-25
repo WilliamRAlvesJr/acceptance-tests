@@ -8,12 +8,20 @@ default << json
 default << html
 %>
 default: -p chrome -p mysql
-chrome: <%=default%> BROWSER=chrome
-chrome_headless: <%=default%> BROWSER=chrome_headless
-firefox: <%=default%> BROWSER=firefox
-firefox_driver: <%=default%> BROWSER=firefox_driver
-firefox_path: <%=default%> BROWSER=firefox_path
+
+linux: <%=default%> SO=linux
+
+chrome: <%=default%> BROWSER=chromedriver
+chrome_headless: <%=default%> BROWSER=chromedriver_headless
+chrome_home: <%=default%> BROWSER=chromedriver_home
+
+firefox: <%=default%> BROWSER=geckodriver
+firefox_headless: <%=default%> BROWSER=geckodriver_headless
+firefox_home: <%=default%> BROWSER=geckodriver_home
+
 phantomjs: <%=default%> BROWSER=phantomjs
+
 mysql: <%=default%> TIMEOUT=30
 mssql: <%=default%> TIMEOUT=60
 oracle: <%=default%> TIMEOUT=90
+

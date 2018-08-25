@@ -1,13 +1,10 @@
-# variaveis de ambiente
-# estaticas
-@download_path = './targets/downloads'
+require_all './features/support/variables/builders'
 
-# dinamicas
-@url = ENV['URL']
-@browser = ENV['BROWSER']
-@driver_path = ENV['DRIVER_PATH']
-@timeout = if ENV['TIMEOUT'].nil?
-             30
-           else
-             ENV['TIMEOUT'].to_i
-           end
+# variaveis de ambiente
+@DOWNLOAD_PATH = './targets/downloads'
+@URL = build_url
+@BROWSER = build_browser
+@TIMEOUT = build_timeout
+@DRIVER_PATH = build_driver_path
+@SO = build_so
+
