@@ -1,7 +1,8 @@
 require_relative 'capabilities/options'
 require_relative 'capabilities/preferences'
+require_relative 'browser_interface'
 
-class FirefoxBrowser
+class FirefoxBrowser < BrowserInterface
   def initialize
     @firefox_options = Selenium::WebDriver::Firefox::Options.new
     @options_builder = OptionsBuilder.new
@@ -10,7 +11,7 @@ class FirefoxBrowser
     @preferences_builder.build @firefox_options
   end
 
-  def get_geckodriver
+  def get_browser
     Capybara.register_driver :firefox do |app|
       Capybara::Selenium::Driver.new(app, options: @firefox_options,
                                           browser: :firefox, driver_path: @DRIVER_PATH)
@@ -18,7 +19,7 @@ class FirefoxBrowser
     :firefox
   end
 
-  def get_geckodriver_home
+  def get_browser_home
     Capybara.register_driver :firefox_home do |app|
       Capybara::Selenium::Driver.new(app, options: @firefox_options,
                                           browser: :selenium_firefox)
@@ -26,7 +27,7 @@ class FirefoxBrowser
     :firefox_home
   end
 
-  def get_geckodriver_headless
+  def get_browser_headless
     Capybara.register_driver :firefox_headless do |app|
       @options_builder.build_headless(@firefox_options)
 
