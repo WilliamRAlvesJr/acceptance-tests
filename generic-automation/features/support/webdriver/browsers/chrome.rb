@@ -1,29 +1,38 @@
 require_relative 'capabilities/options'
-require_relative 'capabilities/prefs'
+require_relative 'capabilities/preferences'
 
-@chrome_options = Selenium::WebDriver::Chrome::Options.new
-build_options @chrome_options
-build_prefs @chrome_options
+class ChromeBrowser
+  def initialize
+    @chrome_options = Selenium::WebDriver::Chrome::Options.new
+    @options_builder = OptionsBuilder.new
+    @options_builder.build @chrome_options
+    @prefs_builder = PreferencesBuilder.new
+    @prefs_builder.build @chrome_options
+  end
 
-# chrome
-Capybara.register_driver :chrome do |app|
-  @chrome_options.add_argument('--start-maximized')
+  def get_chrome
+    Capybara.register_driver :chrome do |app|
+      Capybara::Selenium::Driver.new(app, options: @chrome_options,
+                                          browser: :chrome, driver_path: @DRIVER_PATH)
+    end
+    :chrome
+  end
 
-  Capybara::Selenium::Driver.new(app, options: @chrome_options, browser: :chrome,
-                                      driver_path: @DRIVER_PATH)
-end
+  def get_chrome_home
+    Capybara.register_driver :chrome_home do |app|
+      Capybara::Selenium::Driver.new(app, options: @chrome_options,
+                                          browser: :seleniumchrome)
+    end
+    :chrome_home
+  end
 
-# chrome_home
-Capybara.register_driver :chrome_home do |app|
-  @chrome_options.add_argument('--start-maximized')
+  def get_chrome_headless
+    Capybara.register_driver :chrome_headless do |app|
+      @options_builder.build_headless(@chrome_options)
 
-  Capybara::Selenium::Driver.new(app, options: @chrome_options, browser: :chrome)
-end
-
-# chrome_headless
-Capybara.register_driver :chrome_headless do |app|
-  build_headless(@chrome_options)
-
-  Capybara::Selenium::Driver.new(app, options: @chrome_options,
-                                      browser: :chrome, driver_path: @DRIVER_PATH)
+      Capybara::Selenium::Driver.new(app, options: @chrome_options,
+                                          browser: :chrome, driver_path: @DRIVER_PATH)
+    end
+    :chrome_headless
+  end
 end

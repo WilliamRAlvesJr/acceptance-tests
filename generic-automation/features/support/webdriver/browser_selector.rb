@@ -1,20 +1,21 @@
-def select_browser(browser)
+require_relative 'browsers/chrome'
 
-  if browser == 'geckodriver'
-    :firefox
-  elsif browser == 'geckodriver_headless'
-    :firefox_headless
-  elsif browser == 'geckodriver_home'
-    :firefox_home
+class BrowserSelector
+  def initialize
+    @browser_hash = {}
 
-  elsif browser == 'phantomjs'
-    :phantomjs
+    chrome_chooser = ChromeBrowser.new
+    @browser_hash['chromedriver'] = chrome_chooser.get_chrome
+    @browser_hash['chromedriver_home'] = chrome_chooser.get_chrome_home
+    @browser_hash['chromedriver_headless'] = chrome_chooser.get_chrome_headless
+    
+    firefox_chooser = FirefoxBrowser.new
+    @browser_hash['geckodriver'] = firefox_chooser.get_geckodriver
+    @browser_hash['geckodriver_home'] = firefox_chooser.get_geckodriver_home
+    @browser_hash['geckodriver_headless'] = firefox_chooser.get_geckodriver_headless
+  end
 
-  elsif browser == 'chromedriver_headless'
-    :chrome_headless
-  elsif browser == 'chromedriver_home'
-    :chrome_home
-  else
-    :chrome
+  def select_browser(browser)
+    @browser_hash[browser]
   end
 end

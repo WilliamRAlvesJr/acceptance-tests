@@ -1,0 +1,124 @@
+[
+  {
+    "uri": "features/specs/login.feature",
+    "id": "login-na-página",
+    "keyword": "Funcionalidade",
+    "name": "Login na página",
+    "description": "\tDescrição",
+    "line": 3,
+    "elements": [
+      {
+        "id": "login-na-página;realiza-login",
+        "keyword": "Cenário",
+        "name": "Realiza login",
+        "description": "",
+        "line": 6,
+        "type": "scenario",
+        "before": [
+          {
+            "match": {
+              "location": "capybara-3.2.1/lib/capybara/cucumber.rb:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 23872
+            }
+          },
+          {
+            "match": {
+              "location": "capybara-3.2.1/lib/capybara/cucumber.rb:22"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9443
+            }
+          },
+          {
+            "match": {
+              "location": "features/support/cucumber/hooks.rb:1"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9412
+            }
+          }
+        ],
+        "steps": [
+          {
+            "keyword": "Dado ",
+            "name": "que estou na página de login",
+            "line": 7,
+            "match": {
+              "location": "features/step_definitions/login_steps.rb:3"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5017414353
+            }
+          },
+          {
+            "keyword": "E ",
+            "name": "possuo os dados:",
+            "line": 8,
+            "rows": [
+              {
+                "cells": [
+                  "nome",
+                  "user@phptravels.com"
+                ]
+              },
+              {
+                "cells": [
+                  "senha",
+                  "demouser"
+                ]
+              }
+            ],
+            "match": {
+              "location": "features/step_definitions/login_steps.rb:7"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 543339
+            }
+          },
+          {
+            "keyword": "Quando ",
+            "name": "submeter o formulário",
+            "line": 11,
+            "match": {
+              "location": "features/step_definitions/login_steps.rb:11"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 214626223
+            }
+          },
+          {
+            "keyword": "Então ",
+            "name": "devo estar logado",
+            "line": 12,
+            "match": {
+              "location": "features/step_definitions/login_steps.rb:16"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4343157355
+            }
+          }
+        ],
+        "after": [
+          {
+            "match": {
+              "location": "capybara-3.2.1/lib/capybara/cucumber.rb:10"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 196652323
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

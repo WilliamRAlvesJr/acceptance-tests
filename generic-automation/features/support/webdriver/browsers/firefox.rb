@@ -1,25 +1,38 @@
 require_relative 'capabilities/options'
-require_relative 'capabilities/prefs'
+require_relative 'capabilities/preferences'
 
-@firefox_options = Selenium::WebDriver::Firefox::Options.new
-@firefox_options.add_preference('download.default_directory', @DOWNLOAD_PATH)
+class FirefoxBrowser
+  def initialize
+    @firefox_options = Selenium::WebDriver::Firefox::Options.new
+    @options_builder = OptionsBuilder.new
+    @options_builder.build @firefox_options
+    @preferences_builder = PreferencesBuilder.new
+    @preferences_builder.build @firefox_options
+  end
 
-# firefox
-Capybara.register_driver :firefox do |app|
-  
-  Capybara::Selenium::Driver.new(app, options: @firefox_options,
-    browser: :firefox, driver_path: @DRIVER_PATH)
-end
+  def get_geckodriver
+    Capybara.register_driver :firefox do |app|
+      Capybara::Selenium::Driver.new(app, options: @firefox_options,
+                                          browser: :firefox, driver_path: @DRIVER_PATH)
+    end
+    :firefox
+  end
 
-# firefox_home
-Capybara.register_driver :firefox_home do |app|
-  Capybara::Selenium::Driver.new(app, options: @firefox_options, browser: :firefox)
-end
+  def get_geckodriver_home
+    Capybara.register_driver :firefox_home do |app|
+      Capybara::Selenium::Driver.new(app, options: @firefox_options,
+                                          browser: :selenium_firefox)
+    end
+    :firefox_home
+  end
 
-# firefox_headless
-Capybara.register_driver :firefox_headless do |app|
-  build_headless(@firefox_options)
-  
-  Capybara::Selenium::Driver.new(app, options: @firefox_options,
-    browser: :firefox, driver_path: @DRIVER_PATH)
+  def get_geckodriver_headless
+    Capybara.register_driver :firefox_headless do |app|
+      @options_builder.build_headless(@firefox_options)
+
+      Capybara::Selenium::Driver.new(app, options: @firefox_options,
+                                          browser: :firefox, driver_path: @DRIVER_PATH)
+    end
+    :firefox_headless
+  end
 end

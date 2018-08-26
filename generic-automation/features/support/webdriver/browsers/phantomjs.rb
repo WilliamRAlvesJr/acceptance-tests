@@ -1,4 +1,6 @@
-# O selenium nao da mais suporte para o phantomjs
+# o selenium nao da mais suporte para o phantomjs
+# o phantomjs não será mais usado no codigo
+# sera substituido pelo chrome_headless e firefox_headless
 options = {
   js_errors: false,
   phantomjs_options: [

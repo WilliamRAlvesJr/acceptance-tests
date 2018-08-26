@@ -7,23 +7,33 @@ require 'cucumber'
 require 'require_all'
 require 'faker'
 require_all './features/support/webdriver'
-require_all './features/support/variables'
+require_all './features/support/builders'
 
-SitePrism.configure do |config|
-  config.raise_on_wait_fors = false
-  config.use_implicit_waits = true
+class Env
+  def initialize
+    @URL = UrlBuilder.new.build_url
+    @BROWSER = BrowserBuilder.new.build_browser
+    @TIMEOUT = TimeouBuilder.new.build_timeout
+    @DRIVER_PATH = DriverPathBuilder.new.build_driver_path(@BROWSER, @SO)
+    @SO = SOBuilder.new.build_so
+    $SESSION = nil
+  end
+
+  def start
+    SitePrism.configure do |config|
+      config.raise_on_wait_fors = false
+      config.use_implicit_waits = true
+    end
+
+    Capybara.configure do |config|
+      config.ignore_hidden_elements = false
+      config.default_max_wait_time = @TIMEOUT
+      config.default_driver = BrowserSelector.new.select_browser @BROWSER
+      config.app_host = @URL
+
+      $SESSION = Capybara.current_session
+    end
+  end
 end
 
-Capybara.configure do |config|
-  puts '------------------------------------------------'
-
-  config.ignore_hidden_elements = false
-  config.default_max_wait_time = @TIMEOUT
-  config.default_driver = select_browser @BROWSER
-  config.app_host = @URL
-
-  $SESSION = Capybara.current_session
-  
-  puts '------------------------------------------------'
-end
-
+Env.new.start
