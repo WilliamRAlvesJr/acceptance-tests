@@ -10,7 +10,6 @@ end
 
 Quando("submeter o formulário") do
   @login_page.sign_in(@user['nome'], @user['senha'])
-  @login_page.wait_for_no_loading
 end
 
 Então('devo estar logado') do

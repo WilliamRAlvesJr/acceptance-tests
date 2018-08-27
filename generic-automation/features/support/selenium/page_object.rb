@@ -5,6 +5,7 @@ class PageObject < SitePrism::Page
 
     def initialize
         self.load
+        wait_page_load
     end
 
     def wait_page_load

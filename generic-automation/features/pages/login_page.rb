@@ -5,7 +5,6 @@ class LoginPage < PageObject
   element :input_name, 'input[name=username]'
   element :input_password, 'input[name=password]'
   element :btn_login, 'button[class*=loginbtn]'
-  element :loading, '#rotatingDiv'
 
   def sign_in(name, password)
     input_name.set name
