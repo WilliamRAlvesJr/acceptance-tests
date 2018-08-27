@@ -1,11 +1,12 @@
 require_relative 'load_validation'
 
 class PageObject < SitePrism::Page
-    load_validation { LoadValidation.wait_page_validation self }
 
     def initialize
-        self.load
-        wait_page_load
+        self.load do
+            puts ">> #{self.url}"
+            wait_page_load
+        end
     end
 
     def wait_page_load
