@@ -1,7 +1,7 @@
 require_relative '../pages/login_page'
 
 Dado('que estou na página de login') do
-  @login_page.load
+  @login_page = LoginPage.new
 end
 
 Dado('possuo os dados:') do |table|
@@ -22,13 +22,19 @@ Então('devo estar logado') do
 
   # puts @account_page.url_matches(10)
   # expect(@account_page).to be_displayed
-  wait_page_load(@account_page)
+
+  # wait_page_load(@account_page)
+  
+  @account_page = AccountPage.new
+  @account_page.profiles_bar.wait_section_load
+  @account_page.wishlist_section.wait_section_load
   expect(@account_page.welcome_bar).to have_content 'Hi, Johny Smith'
 
   @account_page.profiles_bar.wishlist.click
   @account_page.wishlist_section.preview_first.click
 
   expect(page).to have_content 'Hyatt Regency Perth'
+
 end
 
 # Dado("que estou na página principal do google") do

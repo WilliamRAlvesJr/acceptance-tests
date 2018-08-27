@@ -1,5 +1,5 @@
 # pagina de login
-class LoginPage < SitePrism::Page
+class LoginPage < PageObject
   set_url '/login'
 
   element :input_name, 'input[name=username]'

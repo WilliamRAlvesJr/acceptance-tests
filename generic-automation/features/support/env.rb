@@ -11,6 +11,7 @@ require_all './features/support/builders'
 
 class Env
   def initialize
+    puts '----------------------------------------------------------------------'
     @URL = UrlBuilder.new.build_url
     @BROWSER = BrowserBuilder.new.build_browser
     @TIMEOUT = TimeouBuilder.new.build_timeout
