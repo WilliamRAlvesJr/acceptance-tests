@@ -1,5 +1,5 @@
 class UrlBuilder
-  def build_url
+  def self.build_url
     if ENV['URL']
       'https://www.phptravels.net'
     else

@@ -1,5 +1,5 @@
 class TimeouBuilder
-  def build_timeout
+  def self.build_timeout
     if ENV['TIMEOUT'].nil?
       30
     else

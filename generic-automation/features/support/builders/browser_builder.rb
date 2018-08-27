@@ -1,5 +1,5 @@
 class BrowserBuilder
-  def build_browser
+  def self.build_browser
     if ENV['BROWSER'].nil?
       'chromedriver'
     else

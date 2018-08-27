@@ -1,5 +1,5 @@
 class LoadValidation
-  def wait_page_validation(page)
+  def self.wait_page_validation(page)
     page.url_matcher
     page.all_there?
 
@@ -10,7 +10,7 @@ class LoadValidation
     )
     end
 
-    def wait_section_validation(section)
+    def self.wait_section_validation(section)
       section.all_there?
   
       sleep(0.3) until $SESSION.evaluate_script(

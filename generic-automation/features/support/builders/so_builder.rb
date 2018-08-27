@@ -1,5 +1,5 @@
 class SOBuilder
-  def build_so
+  def self.build_so
     if ENV['SO'].nil?
       @DRIVER_PATH.concat '.exe'
       'windows'

@@ -12,11 +12,11 @@ require_all './features/support/builders'
 class Env
   def initialize
     puts '----------------------------------------------------------------------'
-    @URL = UrlBuilder.new.build_url
-    @BROWSER = BrowserBuilder.new.build_browser
-    @TIMEOUT = TimeouBuilder.new.build_timeout
-    @DRIVER_PATH = DriverPathBuilder.new.build_driver_path(@BROWSER, @SO)
-    @SO = SOBuilder.new.build_so
+    @URL = UrlBuilder.build_url
+    @BROWSER = BrowserBuilder.build_browser
+    @TIMEOUT = TimeouBuilder.build_timeout
+    @DRIVER_PATH = DriverPathBuilder.build_driver_path(@BROWSER, @SO)
+    @SO = SOBuilder.build_so
     $SESSION = nil
   end
 

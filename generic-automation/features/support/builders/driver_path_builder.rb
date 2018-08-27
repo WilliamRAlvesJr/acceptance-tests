@@ -1,5 +1,5 @@
 class DriverPathBuilder
-  def build_driver_path(browser, so)
+  def self.build_driver_path(browser, so)
     if ENV['DRIVER_PATH'].nil?
       "./features/support/drivers/#{so}/#{browser}"
       if browser.include? '_'
