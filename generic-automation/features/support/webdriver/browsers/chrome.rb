@@ -1,39 +1,14 @@
-require_relative 'capabilities/options'
-require_relative 'capabilities/preferences'
-require_relative 'browser_interface'
+require_relative 'browser_template'
 
-class ChromeBrowser < BrowserInterface
-  def initialize
-    @chrome_options = Selenium::WebDriver::Chrome::Options.new
-    @options_builder = OptionsBuilder.new
-    @options_builder.build @chrome_options
-    @prefs_builder = PreferencesBuilder.new
-    @prefs_builder.build @chrome_options
-  end
-
-  def get_browser
-    Capybara.register_driver :chrome do |app|
-      Capybara::Selenium::Driver.new(app, options: @chrome_options,
-                                          browser: :chrome, driver_path: @DRIVER_PATH)
+module Webdriver
+  module Browsers
+    # Navegador Chrome
+    class Chrome < BrowserTemplate
+      def initialize
+        @browser         = -> { :chrome          }
+        @method_default  = -> { :chrome_default  }
+        @method_headless = -> { :chrome_headless }
+      end
     end
-    :chrome
-  end
-
-  def get_browser_home
-    Capybara.register_driver :chrome_home do |app|
-      Capybara::Selenium::Driver.new(app, options: @chrome_options,
-                                          browser: :seleniumchrome)
-    end
-    :chrome_home
-  end
-
-  def get_browser_headless
-    Capybara.register_driver :chrome_headless do |app|
-      @options_builder.build_headless(@chrome_options)
-
-      Capybara::Selenium::Driver.new(app, options: @chrome_options,
-                                          browser: :chrome, driver_path: @DRIVER_PATH)
-    end
-    :chrome_headless
   end
 end

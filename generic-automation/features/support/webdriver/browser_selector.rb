@@ -1,21 +1,17 @@
-require_relative 'browsers/chrome'
+require_relative 'browsers/browser_template'
 
-class BrowserSelector
-  def initialize
-    @browser_hash = {}
+module Webdriver
+  # Selecionador de browser
+  module BrowserSelector
+    include Browsers
 
-    chrome_chooser = ChromeBrowser.new
-    @browser_hash['chromedriver'] = chrome_chooser.get_browser
-    @browser_hash['chromedriver_home'] = chrome_chooser.get_browser_home
-    @browser_hash['chromedriver_headless'] = chrome_chooser.get_browser_headless
-    
-    firefox_chooser = FirefoxBrowser.new
-    @browser_hash['geckodriver'] = firefox_chooser.get_browser
-    @browser_hash['geckodriver_home'] = firefox_chooser.get_browser_home
-    @browser_hash['geckodriver_headless'] = firefox_chooser.get_browser_headless
-  end
-
-  def select_browser(browser)
-    @browser_hash[browser]
+    # Seleciona um browser reflexivamente
+    def self.select_browser(browser)
+      @props   = browser.capitalize.split('_')
+      @klass   = @props.first || 'chrome'
+      @type    = @props.last  || 'default'
+      @browser = Webdriver::Browsers.const_get(@klass).new
+      @browser.method("browser_#{@type}").call
+    end
   end
 end

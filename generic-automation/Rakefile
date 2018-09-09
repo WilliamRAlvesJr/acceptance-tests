@@ -1,0 +1,13 @@
+desc "Verifie code smells"
+task :code_smells do
+    puts "Verificando code smells....."
+    sh %{rubycritic -p temp/logs/code_smells}
+end
+
+desc "Clean logs and downloads"
+task :clean do
+    sh %{rm -rf temp/logs/code_smells/* }
+    sh %{rm -rf temp/logs/cucumber/* }
+    sh %{rm -rf temp/downloads/* }
+end
+
