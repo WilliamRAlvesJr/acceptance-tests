@@ -4,7 +4,7 @@ module Webdriver
       # Preferencias dos navegadores
       class PreferencesBuilder
         def initialize
-          @download_path = './targets/downloads'
+          @download_path = './temp/downloads'
           @preferences = {}
           @preferences['download.default_directory'] = @download_path
         end
