@@ -1,6 +1,6 @@
 require_relative 'load_validation'
 
-module Selenium
+module Site
   # Sobreescrive do PageObject padrao
   class SectionObject < SitePrism::Section
     def wait_section_load

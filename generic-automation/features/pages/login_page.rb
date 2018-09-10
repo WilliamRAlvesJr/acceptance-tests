@@ -1,5 +1,5 @@
 # pagina de login
-class LoginPage < Selenium::PageObject
+class LoginPage < Site::PageObject
   set_url '/login'
 
   element :input_name, 'input[name=username]'

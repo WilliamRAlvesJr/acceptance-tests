@@ -1,5 +1,5 @@
 # Valida JQuery e espera carregar o documento
-module Selenium
+module Site
   module LoadValidation
     include Environment
 
