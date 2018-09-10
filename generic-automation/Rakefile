@@ -8,6 +8,7 @@ desc "Clean logs and downloads"
 task :clean do
     sh %{rm -rf temp/logs/code_smells/* }
     sh %{rm -rf temp/logs/cucumber/* }
+    sh %{rm -rf temp/logs/shots/* }
     sh %{rm -rf temp/downloads/* }
 end
 

@@ -1,5 +1,5 @@
-# Valida JQuery e espera carregar o documento
 module Site
+  # Valida JQuery e espera carregar o documento
   module LoadValidation
     include Environment
 
