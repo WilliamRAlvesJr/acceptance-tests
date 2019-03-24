@@ -1,1 +1,1 @@
-# system-tests
+# acceptance-tests
